@@ -9,6 +9,17 @@ public class Interacao {
     private String colaboradorResponsavel;
     private Doador doador;
 
+    public Interacao() {
+    }
+
+    public Interacao(int idInteracao, String canal, String data, String assunto, String colaboradorResponsavel) {
+        this.idInteracao = idInteracao;
+        this.canal = canal;
+        this.data = data;
+        this.assunto = assunto;
+        this.colaboradorResponsavel = colaboradorResponsavel;
+    }
+
     public int getIdInteracao() {
         return idInteracao;
     }
@@ -55,5 +66,16 @@ public class Interacao {
 
     public void setDoador(Doador doador) {
         this.doador = doador;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nInteracao{" +
+                "\nidInteracao=" + idInteracao +
+                "\ncanal='" + canal + '\'' +
+                "\ndata='" + data + '\'' +
+                "\nassunto='" + assunto + '\'' +
+                "\ncolaboradorResponsavel='" + colaboradorResponsavel + '\'' +
+                "\ndoador=" + doador;
     }
 }

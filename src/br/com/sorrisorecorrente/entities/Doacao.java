@@ -10,6 +10,16 @@ public class Doacao {
     private Programa programa;
     private Recibo recibo;
 
+    public Doacao() {
+    }
+
+    public Doacao(int idDoacao, double valor, String data, String formaPagamento) {
+        this.idDoacao = idDoacao;
+        this.valor = valor;
+        this.data = data;
+        this.formaPagamento = formaPagamento;
+    }
+
     public int getIdDoacao() {
         return idDoacao;
     }
@@ -64,5 +74,17 @@ public class Doacao {
 
     public void setRecibo(Recibo recibo) {
         this.recibo = recibo;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nDoacao{" +
+                "\nidDoacao=" + idDoacao +
+                "\nvalor=" + valor +
+                "\ndata='" + data + '\'' +
+                "\nformaPagamento='" + formaPagamento + '\'' +
+                "\ndoador=" + doador +
+                "\nprograma=" + programa +
+                "\nrecibo=" + recibo;
     }
 }

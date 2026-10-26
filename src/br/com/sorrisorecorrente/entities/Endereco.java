@@ -11,6 +11,20 @@ public class Endereco {
     private String estado;
     private String pais;
 
+    public Endereco() {
+    }
+
+    public Endereco(int idEndereco, String logradouro, int numero, String complemento, String cep, String cidade, String estado, String pais) {
+        this.idEndereco = idEndereco;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.pais = pais;
+    }
+
     public int getIdEndereco() {
         return idEndereco;
     }
@@ -73,5 +87,18 @@ public class Endereco {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nEndereco{" +
+                "\nidEndereco=" + idEndereco +
+                "\nlogradouro='" + logradouro + '\'' +
+                "\nnumero=" + numero +
+                "\ncomplemento='" + complemento + '\'' +
+                "\ncep='" + cep + '\'' +
+                "\ncidade='" + cidade + '\'' +
+                "\nestado='" + estado + '\'' +
+                "\npais='" + pais;
     }
 }

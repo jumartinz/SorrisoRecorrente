@@ -11,6 +11,19 @@ public class Doador {
     private String dataCadastro;
     private Endereco endereco;
 
+    public Doador() {
+    }
+
+    public Doador(int idDoador, String nome, String cpf, String cnpj, String email, String telefone, String dataCadastro) {
+        this.idDoador = idDoador;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.email = email;
+        this.telefone = telefone;
+        this.dataCadastro = dataCadastro;
+    }
+
     public int getIdDoador() {
         return idDoador;
     }
@@ -73,5 +86,18 @@ public class Doador {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nDoador{" +
+                "\nidDoador=" + idDoador +
+                "\nnome='" + nome + '\'' +
+                "\ncpf='" + cpf + '\'' +
+                "\ncnpj='" + cnpj + '\'' +
+                "\nemail='" + email + '\'' +
+                "\ntelefone='" + telefone + '\'' +
+                "\ndataCadastro='" + dataCadastro + '\'' +
+                "\nendereco=" + endereco;
     }
 }

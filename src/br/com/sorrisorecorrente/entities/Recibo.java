@@ -7,6 +7,15 @@ public class Recibo {
     private String dataEmissao;
     private Doacao doacao;
 
+    public Recibo() {
+    }
+
+    public Recibo(int idRecibo, int numero, String dataEmissao) {
+        this.idRecibo = idRecibo;
+        this.numero = numero;
+        this.dataEmissao = dataEmissao;
+    }
+
     public int getIdRecibo() {
         return idRecibo;
     }
@@ -37,5 +46,14 @@ public class Recibo {
 
     public void setDoacao(Doacao doacao) {
         this.doacao = doacao;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nRecibo{" +
+                "\nidRecibo=" + idRecibo +
+                "\nnumero=" + numero +
+                "\ndataEmissao='" + dataEmissao + '\'' +
+                "\ndoacao=" + doacao;
     }
 }

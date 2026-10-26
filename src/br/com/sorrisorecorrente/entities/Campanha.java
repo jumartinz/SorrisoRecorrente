@@ -9,6 +9,18 @@ public class Campanha {
     private double meta;
     private double percentualDistribuido;
 
+    public Campanha() {
+    }
+
+    public Campanha(int idCampanha, String nome, String dataInicio, String dataFim, double meta, double percentualDistribuido) {
+        this.idCampanha = idCampanha;
+        this.nome = nome;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.meta = meta;
+        this.percentualDistribuido = percentualDistribuido;
+    }
+
     public int getIdCampanha() {
         return idCampanha;
     }
@@ -55,5 +67,16 @@ public class Campanha {
 
     public void setPercentualDistribuido(double percentualDistribuido) {
         this.percentualDistribuido = percentualDistribuido;
+    }
+
+    @Override
+    public String toString() {
+        return "Campanha{" +
+                "\nidCampanha=" + idCampanha +
+                "\nnome='" + nome + '\'' +
+                "\ndataInicio='" + dataInicio + '\'' +
+                "\ndataFim='" + dataFim + '\'' +
+                "\nmeta=" + meta +
+                "\npercentualDistribuido=" + percentualDistribuido;
     }
 }

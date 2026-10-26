@@ -8,6 +8,16 @@ public class Colaborador {
     private String cargo;
     private Score score;
 
+    public Colaborador() {
+    }
+
+    public Colaborador(int idColaborador, String nome, String email, String cargo) {
+        this.idColaborador = idColaborador;
+        this.nome = nome;
+        this.email = email;
+        this.cargo = cargo;
+    }
+
     public int getIdColaborador() {
         return idColaborador;
     }
@@ -46,5 +56,15 @@ public class Colaborador {
 
     public void setScore(Score score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nColaborador{" +
+                "\nidColaborador=" + idColaborador +
+                "\nnome='" + nome + '\'' +
+                "\nemail='" + email + '\'' +
+                "\ncargo='" + cargo + '\'' +
+                "\nscore=" + score;
     }
 }

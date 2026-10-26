@@ -3,9 +3,19 @@ package br.com.sorrisorecorrente.entities;
 public class Score {
 
     private int idScore;
-    private double Valor;
+    private double valor;
     private String nivel;
     private String dataCalculo;
+
+    public Score() {
+    }
+
+    public Score(int idScore, double valor, String nivel, String dataCalculo) {
+        this.idScore = idScore;
+        this.valor = valor;
+        this.nivel = nivel;
+        this.dataCalculo = dataCalculo;
+    }
 
     public int getIdScore() {
         return idScore;
@@ -16,11 +26,10 @@ public class Score {
     }
 
     public double getValor() {
-        return Valor;
+        return valor;
     }
 
-    public void setValor(double valor) {
-        Valor = valor;
+    public void setValor(double valor) { valor = valor;
     }
 
     public String getNivel() {
@@ -37,5 +46,14 @@ public class Score {
 
     public void setDataCalculo(String dataCalculo) {
         this.dataCalculo = dataCalculo;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\nScore{" +
+                "\nidScore=" + idScore +
+                "\nvalor=" + valor +
+                "\nnivel='" + nivel + '\'' +
+                "\ndataCalculo='" + dataCalculo;
     }
 }
