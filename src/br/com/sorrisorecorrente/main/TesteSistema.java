@@ -14,7 +14,7 @@ public class TesteSistema {
         Interacao objInteracao = new Interacao();
         Programa objPrograma = new Programa();
         Recibo objRecibo = new Recibo();
-        Score objScore = new Score;
+        Score objScore = new Score();
 
         objCampanha.setIdCampanha();
         objCampanha.setNome();

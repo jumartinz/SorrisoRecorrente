@@ -48,6 +48,13 @@ public class Score {
         this.dataCalculo = dataCalculo;
     }
 
+    public String calcularNivel() {
+        if (valor >= 70) { nivel = "Alto"; }
+        else if (valor >= 40) {nivel = "Médio"; }
+        else { nivel = "Baixo";}
+        return nivel;
+    }
+
     @Override
     public String toString() {
         return "\n\nScore{" +
