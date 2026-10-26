@@ -20,7 +20,21 @@ public class TesteSistema {
         objCampanha.setNome();
         objCampanha.setDataInicio();
         objCampanha.setDataFim();
-        objCampanha.set
+        objCampanha.setMeta();
+        objCampanha.setPercentualDistribuido();
+
+        objCampanhaPrograma.setPercentualDistribuido();
+        objCampanhaPrograma.setDatVinculacao();
+        objCampanhaPrograma.setCampanha();
+        objCampanhaPrograma.setPrograma();
+
+        objColaborador.setIdColaborador();
+        objColaborador.setNome();
+        objColaborador.setEmail();
+        objColaborador.setCargo();
+        objColaborador.setScore();
+
+
 
 
 
