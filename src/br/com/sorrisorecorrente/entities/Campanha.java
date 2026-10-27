@@ -69,6 +69,11 @@ public class Campanha {
         this.percentualDistribuido = percentualDistribuido;
     }
 
+    public double calcularProgresso(double totalArrecadado) {
+        double percentual = (totalArrecadado / meta) * 100;
+        return percentual;
+    }
+
     @Override
     public String toString() {
         return "Campanha{" +

@@ -23,12 +23,12 @@ public class CampanhaPrograma {
         this.percentualDistribuido = percentualDistribuido;
     }
 
-    public String getDatVinculacao() {
+    public String getDataVinculacao() {
         return dataVinculacao;
     }
 
-    public void setDatVinculacao(String datVinculacao) {
-        this.dataVinculacao = datVinculacao;
+    public void setDatVinculacao(String dataVinculacao) {
+        this.dataVinculacao = dataVinculacao;
     }
 
     public Campanha getCampanha() {
