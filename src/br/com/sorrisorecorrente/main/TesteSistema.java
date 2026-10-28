@@ -1,175 +1,152 @@
-package br.com.sorrisorecorrente.main;
+package br.com.sorrisorecorrente.test;
 
+import javax.swing.JOptionPane;
 import br.com.sorrisorecorrente.entities.*;
 
 public class TesteSistema {
 
+    // Métodos auxiliares solicitados
+    static String texto(String j) {
+        return JOptionPane.showInputDialog(j);
+    }
+
+    static int inteiro(String j) {
+        return Integer.parseInt(JOptionPane.showInputDialog(j));
+    }
+
+    static double real(String j) {
+        return Double.parseDouble(JOptionPane.showInputDialog(j));
+    }
+
     public static void main(String[] args) {
+        try {
+            JOptionPane.showMessageDialog(null, "Bem-vindo ao Sistema de Testes - Sorriso Recorrente!");
 
-        Endereco objEndereco = new Endereco();
-        Doador objDoador = new Doador();
-        Programa objPrograma = new Programa();
-        Campanha objCampanha = new Campanha();
-        CampanhaPrograma objCampanhaPrograma = new CampanhaPrograma();
-        Doacao objDoacao = new Doacao();
-        Recibo objRecibo = new Recibo();
-        Score objScore = new Score();
-        Colaborador objColaborador = new Colaborador();
-        Interacao objInteracao = new Interacao();
+            // 1. Cadastrando Endereço e Doador
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Endereço ---");
+            Endereco endereco = new Endereco(
+                    inteiro("ID do Endereço:"),
+                    texto("Logradouro:"),
+                    inteiro("Número:"),
+                    texto("Complemento:"),
+                    texto("CEP:"),
+                    texto("Cidade:"),
+                    texto("Estado:"),
+                    texto("País:")
+            );
 
-        objEndereco.setIdEndereco(1);
-        objEndereco.setLogradouro("Avenida Paulista");
-        objEndereco.setNumero(1106);
-        objEndereco.setComplemento("7º andar");
-        objEndereco.setCep("01311-000");
-        objEndereco.setCidade("São Paulo");
-        objEndereco.setEstado("SP");
-        objEndereco.setPais("Brasil");
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Doador ---");
+            Doador doador = new Doador(
+                    inteiro("ID do Doador:"),
+                    texto("Nome do Doador:"),
+                    texto("CPF:"),
+                    texto("CNPJ (ou deixe vazio):"),
+                    texto("E-mail:"),
+                    texto("Telefone:"),
+                    texto("Data de Cadastro:")
+            );
+            doador.setEndereco(endereco);
 
-        objDoador.setIdDoador(10);
-        objDoador.setNome("Maria Souza");
-        objDoador.setCpf("123.456.789-00");
-        objDoador.setCnpj("");
-        objDoador.setEmail("maria@email.com");
-        objDoador.setTelefone("(11) 99999-0000");
-        objDoador.setDataCadastro("2026-10-26");
-        objDoador.setEndereco(objEndereco);
+            // 2. Cadastrando Programa
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Programa ---");
+            Programa programa = new Programa(
+                    inteiro("ID do Programa:"),
+                    texto("Nome do Programa:"),
+                    texto("Público-Alvo:"),
+                    texto("Descrição:")
+            );
 
-        objPrograma.setIdPrograma(1);
-        objPrograma.setNome("Dentista do Bem");
-        objPrograma.setPublicoAlvo("Jovens de 11 a 17 anos em situação de vulnerabilidade");
-        objPrograma.setDescricao("Tratamento odontológico gratuito feito por dentistas voluntários");
+            // 3. Cadastrando Doação e Recibo
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Doação ---");
+            Doacao doacao = new Doacao(
+                    inteiro("ID da Doação:"),
+                    real("Valor da Doação (R$):"),
+                    texto("Data da Doação:"),
+                    texto("Forma de Pagamento (ex: Pix, Cartão):")
+            );
+            doacao.setDoador(doador);
+            doacao.setPrograma(programa);
 
-        objCampanha.setIdCampanha(100);
-        objCampanha.setNome("Sorriso para Todos");
-        objCampanha.setDataInicio("2026-11-01");
-        objCampanha.setDataFim("2026-12-31");
-        objCampanha.setMeta(1000.0);
-        objCampanha.setPercentualDistribuido(100.0);
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Recibo ---");
+            Recibo recibo = new Recibo(
+                    inteiro("ID do Recibo:"),
+                    inteiro("Número do Recibo:"),
+                    texto("Data de Emissão:")
+            );
+            recibo.setDoacao(doacao);
+            doacao.setRecibo(recibo);
 
-        objCampanhaPrograma.setPercentualDistribuido(100.0);
-        objCampanhaPrograma.setDatVinculacao("2026-11-01");
-        objCampanhaPrograma.setCampanha(objCampanha);
-        objCampanhaPrograma.setPrograma(objPrograma);
+            // 4. Cadastrando Campanha e Testando Progresso
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Campanha ---");
+            Campanha campanha = new Campanha(
+                    inteiro("ID da Campanha:"),
+                    texto("Nome da Campanha:"),
+                    texto("Data de Início:"),
+                    texto("Data de Fim:"),
+                    real("Meta da Campanha (R$):"),
+                    real("Percentual Distribuído (%):")
+            );
 
-        objDoacao.setIdDoacao(500);
-        objDoacao.setValor(30.0);
-        objDoacao.setData("2026-10-26");
-        objDoacao.setFormaPagamento("Pix");
-        objDoacao.setDoador(objDoador);
-        objDoacao.setPrograma(objPrograma);
-        objDoacao.setRecibo(objRecibo);
+            double totalArrecadado = real("Informe o valor total arrecadado para testar o cálculo de progresso:");
+            double progressoCalculado = campanha.calcularProgresso(totalArrecadado);
 
-        objRecibo.setIdRecibo(2026001);
-        objRecibo.setNumero(2026001);
-        objRecibo.setDataEmissao("2026-10-26");
-        objRecibo.setDoacao(objDoacao);
+            // 5. Relacionamento Campanha e Programa
+            CampanhaPrograma campanhaPrograma = new CampanhaPrograma(
+                    real("Percentual Distribuído (Campanha-Programa):"),
+                    texto("Data de Vinculação:")
+            );
+            campanhaPrograma.setCampanha(campanha);
+            campanhaPrograma.setPrograma(programa);
 
-        objScore.setIdScore(1);
-        objScore.setValor(82.5);
-        objScore.setNivel("");
-        objScore.setDataCalculo("2026-10-26");
+            // 6. Cadastrando Score e Colaborador
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Score ---");
+            Score score = new Score(
+                    inteiro("ID do Score:"),
+                    real("Valor do Score (ex: 75.5):"),
+                    "",
+                    texto("Data de Cálculo do Score:")
+            );
+            String nivelScore = score.calcularNivel();
 
-        objColaborador.setIdColaborador(7);
-        objColaborador.setNome("Carlos Lima");
-        objColaborador.setEmail("carlos@turmadobem.org");
-        objColaborador.setCargo("Analista de Relacionamento");
-        objColaborador.setScore(objScore);
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Colaborador ---");
+            Colaborador colaborador = new Colaborador(
+                    inteiro("ID do Colaborador:"),
+                    texto("Nome do Colaborador:"),
+                    texto("E-mail do Colaborador:"),
+                    texto("Cargo:")
+            );
+            colaborador.setScore(score);
 
-        objInteracao.setIdInteracao(900);
-        objInteracao.setCanal("chatbot");
-        objInteracao.setData("2026-10-26");
-        objInteracao.setAssunto("Dúvida sobre doação mensal");
-        objInteracao.setColaboradorResponsavel(objColaborador.getNome());
-        objInteracao.setDoador(objDoador);
+            // 7. Cadastrando Interação
+            JOptionPane.showMessageDialog(null, "--- Cadastro de Interação ---");
+            Interacao interacao = new Interacao(
+                    inteiro("ID da Interação:"),
+                    texto("Canal (ex: Telefone, Chat):"),
+                    texto("Data da Interação:"),
+                    texto("Assunto:"),
+                    texto("Nome do Colaborador Responsável:")
+            );
+            interacao.setDoador(doador);
 
-        System.out.println("=== ENDERECO ===");
-        System.out.println("Id: " + objEndereco.getIdEndereco());
-        System.out.println("Logradouro: " + objEndereco.getLogradouro());
-        System.out.println("Número: " + objEndereco.getNumero());
-        System.out.println("Complemento: " + objEndereco.getComplemento());
-        System.out.println("CEP: " + objEndereco.getCep());
-        System.out.println("Cidade: " + objEndereco.getCidade());
-        System.out.println("Estado: " + objEndereco.getEstado());
-        System.out.println("País: " + objEndereco.getPais());
+            // Exibindo Resumo Geral dos Testes
+            String resumo = "=== RESULTADOS DOS TESTES DO SISTEMA ===\n\n" +
+                    "Progresso da Campanha '" + campanha.getNome() + "': " + progressoCalculado + "%\n" +
+                    "Nível do Score Calculado: " + nivelScore + "\n" +
+                    doador + "\n" +
+                    programa + "\n" +
+                    doacao + "\n" +
+                    recibo + "\n" +
+                    campanha + "\n" +
+                    campanhaPrograma + "\n" +
+                    colaborador + "\n" +
+                    interacao;
 
-        System.out.println("\n=== DOADOR ===");
-        System.out.println("Id: " + objDoador.getIdDoador());
-        System.out.println("Nome: " + objDoador.getNome());
-        System.out.println("CPF: " + objDoador.getCpf());
-        System.out.println("CNPJ: " + objDoador.getCnpj());
-        System.out.println("E-mail: " + objDoador.getEmail());
-        System.out.println("Telefone: " + objDoador.getTelefone());
-        System.out.println("Data de cadastro: " + objDoador.getDataCadastro());
-        System.out.println("Cidade: " + objDoador.getEndereco().getCidade());
+            JOptionPane.showMessageDialog(null, resumo);
 
-        System.out.println("\n=== PROGRAMA ===");
-        System.out.println("Id: " + objPrograma.getIdPrograma());
-        System.out.println("Nome: " + objPrograma.getNome());
-        System.out.println("Público-alvo: " + objPrograma.getPublicoAlvo());
-        System.out.println("Descrição: " + objPrograma.getDescricao());
-
-        System.out.println("\n=== CAMPANHA ===");
-        System.out.println("Id: " + objCampanha.getIdCampanha());
-        System.out.println("Nome: " + objCampanha.getNome());
-        System.out.println("Início: " + objCampanha.getDataInicio());
-        System.out.println("Fim: " + objCampanha.getDataFim());
-        System.out.println("Meta: R$ " + objCampanha.getMeta());
-        System.out.println("Percentual distribuído: " + objCampanha.getPercentualDistribuido() + "%");
-        System.out.println("Progresso (arrecadado R$ 250): " + objCampanha.calcularProgresso(250.0) + "%");
-
-        System.out.println("\n=== CAMPANHA PROGRAMA ===");
-        System.out.println("Percentual distribuído: " + objCampanhaPrograma.getPercentualDistribuido() + "%");
-        System.out.println("Data de vinculação: " + objCampanhaPrograma.getDataVinculacao());
-        System.out.println("Campanha: " + objCampanhaPrograma.getCampanha().getNome());
-        System.out.println("Programa: " + objCampanhaPrograma.getPrograma().getNome());
-
-        System.out.println("\n=== DOACAO ===");
-        System.out.println("Id: " + objDoacao.getIdDoacao());
-        System.out.println("Valor: R$ " + objDoacao.getValor());
-        System.out.println("Data: " + objDoacao.getData());
-        System.out.println("Forma de pagamento: " + objDoacao.getFormaPagamento());
-        System.out.println("Doador: " + objDoacao.getDoador().getNome());
-        System.out.println("Programa: " + objDoacao.getPrograma().getNome());
-        System.out.println("Número do recibo: " + objDoacao.getRecibo().getNumero());
-
-        System.out.println("\n=== RECIBO ===");
-        System.out.println("Id: " + objRecibo.getIdRecibo());
-        System.out.println("Número: " + objRecibo.getNumero());
-        System.out.println("Data de emissão: " + objRecibo.getDataEmissao());
-        System.out.println("Valor da doação: R$ " + objRecibo.getDoacao().getValor());
-
-        System.out.println("\n=== SCORE ===");
-        System.out.println("Id: " + objScore.getIdScore());
-        System.out.println("Valor: " + objScore.getValor());
-        System.out.println("Data do cálculo: " + objScore.getDataCalculo());
-        System.out.println("Nível calculado: " + objScore.calcularNivel());
-
-        System.out.println("\n=== COLABORADOR ===");
-        System.out.println("Id: " + objColaborador.getIdColaborador());
-        System.out.println("Nome: " + objColaborador.getNome());
-        System.out.println("E-mail: " + objColaborador.getEmail());
-        System.out.println("Cargo: " + objColaborador.getCargo());
-        System.out.println("Nível do score: " + objColaborador.getScore().getNivel());
-
-        System.out.println("\n=== INTERACAO ===");
-        System.out.println("Id: " + objInteracao.getIdInteracao());
-        System.out.println("Canal: " + objInteracao.getCanal());
-        System.out.println("Data: " + objInteracao.getData());
-        System.out.println("Assunto: " + objInteracao.getAssunto());
-        System.out.println("Colaborador responsável: " + objInteracao.getColaboradorResponsavel());
-        System.out.println("Doador: " + objInteracao.getDoador().getNome());
-
-        System.out.println("\n=== TOSTRING ===");
-        System.out.println(objEndereco);
-        System.out.println(objDoador);
-        System.out.println(objPrograma);
-        System.out.println(objCampanha);
-        System.out.println(objCampanhaPrograma);
-        System.out.println(objDoacao);
-        System.out.println(objRecibo);
-        System.out.println(objScore);
-        System.out.println(objColaborador);
-        System.out.println(objInteracao);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Erro: Formato de número inválido inserido. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
